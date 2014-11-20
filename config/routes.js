@@ -34,6 +34,15 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
+  },
+  "/sellerview" : {
+	  view: 'sellerview'
+  },
+  "/buyerview" : {
+	  view: 'buyerview'
+  },
+  "/fbcurator" : {
+    view: 'fbcurator'
   }
 
   /***************************************************************************
