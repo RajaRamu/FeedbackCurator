@@ -1,7 +1,96 @@
-<!DOCTYPE html>
+<!doctype html>
+<html ng-app="userModel">
 <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width" />
+<title> {{ name }} </title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+<style>
+html body {
+    background-image: url('http://ir.ebaystatic.com/pictures/aw/pics/cmp/ds3/imgbg.jpg');
+}
+html, body, h1, h2, h3, li, button, input, select, textarea {
+    color: #333;
+    font-family: "Helvetica neue",Helvetica,Arial,sans-serif;
+}
+body{
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333;
+}
+a, a:active, a:link, a:visited, .anchor {
+    color: #0654BA;
+    text-decoration: none;
+}
+.logo{
+    padding:10px;
+
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    border: 0px none;
+}
+@media(max-width:767px){
+    .logo img{
+        height:35px;
+        padding:5px 5px 3px;
+    }
+}
+.navbar-inverse{
+    background: #fff !important;
+    border:0px none !important;
+    border-bottom:1px solid #ddd !important;
+}
+</style>
 </head>
 <body>
-buyer view
+<form name="feedbackForm">
+<nav class="navbar navbar-inverse" role="navigation">
+<div class="container">
+<div class="header">
+<div class="logo"><a href="http://www.ebay.com/"><img src="http://ir.ebaystatic.com/pictures/aw/pics/logos/logoEbayNew.png" alt="eBay logo" border="0"></a></div>
+</div>
+
+</div>
+</nav>
+<div class="container" ng-controller="userController">
+
+
+<div >
+    <div ng-include="'dataView'"></div>
+
+    <div ng-include="'graphView'"></div>
+</div>
+</div>
+</form>
+
+
+
+<!-- Load jQuery, BootStrap and AngularJS from the CDN. -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+
+<!-- Load the app module and its classes. -->
+<script type="text/javascript">
+
+var userApp = angular.module('userModel', []);
+
+userApp.controller('userController', function ($scope) {
+
+
+});
+
+</script>
+
 </body>
 </html>

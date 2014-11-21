@@ -43,6 +43,12 @@ module.exports.routes = {
   },
   "/fbcurator" : {
     view: 'fbcurator'
+  },
+  "/graphView" : {
+    view: 'graphView'
+  },
+  "/dataView" : {
+    view: 'dataView'
   }
 
   /***************************************************************************
