@@ -95,9 +95,45 @@ img{
 var userApp = angular.module('userModel', []);
 
 userApp.controller('userController', function ($scope) {
+        $scope.feedback = "Feedback";
+        $scope.name = "From Sellers";
+        $scope.offers = "Offers";
 
+        $scope.dataItems = [
+{"users" : { "name" : "sri", "score" : "499", "star" : "y" },
+"comment" : "Hope to deal with you again. Thank you.",
+"title" : "Air Hogs RC AtmoSphere",
+"itemid" : "360839790794",
+"price" :  "33.00",
+"feedback" : { "status" : "Accepted", "reason" : "Full refund"}
+},
+{ "users" : { "name" : "rar", "score" : "509", "star" : "b" },
+"comment" : "Quick response and fast payment. Perfect! THANKS!!",
+"title" : "Boys' 16 Inch Rallye Pro Maxx Bike",
+"itemid" : "360839793794",
+"price" :  "29.00",
+"feedback" : { "status" : "Pending", "reason" : "--"}
+},
+{"users" : { "name" : "niz", "score" : "539", "star" : "r" },
+"comment" : "Hope to deal with you again. Thank you.",
+"title" : "Air Hogs RC AtmoSphere",
+"itemid" : "360839792794",
+"price" :  "56.00",
+"feedback" : { "status" : "Accepted", "reason" : "Full refund"}
+},
+{"users" : { "name" : "rar", "score" : "509", "star" : "b" },
+"comment" : "Quick response and fast payment. Perfect! THANKS!!",
+"title" : "Boys' 16 Inch Rallye Pro Maxx Bike",
+"itemid" : "360839798794",
+"price" :  "12.00",
+"feedback" : { "status" : "Pending", "reason" : "--"}
+}
+
+        ]
 
 });
+
+
 
 </script>
 
