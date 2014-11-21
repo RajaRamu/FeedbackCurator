@@ -49,6 +49,14 @@ img{
     border:0px none !important;
     border-bottom:1px solid #ddd !important;
 }
+.sub_view {
+    border: 1px solid #DDD;
+    border-radius: 3px;
+    background-color: white;
+    box-shadow: 4px 4px 1px #EEE;
+    margin-bottom: 20px;
+    padding: 10px;
+}
 </style>
 </head>
 <body>
@@ -64,9 +72,10 @@ img{
 <div class="container" ng-controller="userController">
 
 
-<div >
+<div class="sub_view">
     <div ng-include="'dataView'"></div>
-
+</div>
+<div class="sub_view">
     <div ng-include="'graphView'"></div>
 </div>
 </div>
