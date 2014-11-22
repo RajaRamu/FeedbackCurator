@@ -25,7 +25,8 @@
 
 <tbody>
 <tr ng-repeat="(key, val) in dataItems | filter: filterfn : strict">
-        <td class="icon"><div>{{dataItems[key].feedback_comments}}</div>
+        <td class="icon">
+            <div>{{dataItems[key].feedback_comments}}</div>
             <div>
 <a href="http://www.ebay.com/itm/{{dataItems[key].item_id}}">{{dataItems[key].item_title}}</a>
             </div>
@@ -34,11 +35,11 @@
                 <a href="http://www.ebay.com/usr/{{dataItems[key].buyer_info.buyer_name}}"><span>{{dataItems[key].buyer_info.buyer_name}}</span>
                     ( <span>{{dataItems[key].buyer_info.total_feedback_score}}</span><img src="{{dataItems[key].buyer_info.feedback_star}}" />
                     )</a>
-                <span>${{dataItems[key].item_price}}</span>
+                <span class="price">${{dataItems[key].item_price}}</span>
             </div>
         </td>
         
-        <td class="offers">
+        <td class="offers"> <span ng-class="{'green': dataItems[key].offer_details.offer_sent == 'No', 'blue': dataItems[key].offer_details.offer_sent == 'Yes'}">{{dataItems[key].offer_details.offer_sent}}</span>
         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
         <span  class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
         <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
