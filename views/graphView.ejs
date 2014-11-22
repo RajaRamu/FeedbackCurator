@@ -1,4 +1,4 @@
-<div>
+<div class="dview">
 <style type="text/css">
 table.dbTableView{
 width:100%;
@@ -11,13 +11,88 @@ vertical-align:top;
 table.dbTableView th{
 border-bottom:1px solid #ddd;
 }
-
-table.dbTableView .icon{
-        padding-left:25px;
-background:url(http://q.ebaystatic.com/aw/pics/icon/iconPos_16x16.gif) no-repeat left 10px;
+table.dbTableView th, table.dbTableView td{
+    font-size:12px;
 }
-</style>
+table.dbTableView .icon{
+        padding-left:18px;
+background:url(http://q.ebaystatic.com/aw/pics/icon/iconPos_16x16.gif) no-repeat left 10px;
+background-size: 12px 12px;
+}
 
+table.dbTableView .buyer_star img{
+    width:20px; height:20px; vertical-align:top;
+}
+
+table.dbTableView .offers{
+    min-width:100px;
+}
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+    table.dbTableView .icon div{
+        width:100px;
+        text-overflow: ellipsis;
+        white-space:nowrap;
+        overflow:hidden;
+    }
+    table.dbTableView .icon{
+        background-size: 10px 10px;
+        padding-left:15px;
+    }
+    
+}
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+    table.dbTableView .offers{
+        min-width:60px;
+    }
+}
+
+.filter *{
+    font-family: verdana;
+    font-size:11px;
+    height:auto;
+    
+}
+.filter input.form-control{
+    width:25%;
+    float:right;
+}
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+    .filter input.form-control{
+        width:100%;
+        float:none;
+    }
+    .filter_group .span5{
+        float:none;
+        display:block;
+        width:100%;
+        margin-bottom:10px;
+        
+    }
+}
+.filter_group{
+    margin-bottom:20px;
+}
+.filter_group .span5{
+    float:left;font-weight:bold;font-size:11px;
+}
+
+</style>
+<div class="filter_group">
+    <span class="span5">{{dataItems[0].seller_info.total_feedback_score}} Feedback received</span>
+<div class="input-group filter">
+    <input type="text" class="form-control" placeholder="Filter title">
+        <div class="input-group-btn">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Period <span class="caret"></span></button>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                <li><a href="#">Past 1 month</a></li>
+                <li><a href="#">Past 6 months</a></li>
+                <li><a href="#">Past 12 months</a></li>
+                <li class="divider"></li>
+                <li><a href="#">All</a></li>
+            </ul>
+        </div><!-- /btn-group -->
+        </div>
+</div>
 <table class="dbTableView" cellpadding="0" cellspacing="0" border="0">
 <thead>
 <th>{{feedback}}</th>
@@ -26,20 +101,21 @@ background:url(http://q.ebaystatic.com/aw/pics/icon/iconPos_16x16.gif) no-repeat
 </thead>
 
 <tbody>
-    <tr ng-repeat="(key, val) in dataItems">
-        <td class="icon">{{dataItems[key].comment}}
+<tr ng-repeat="(key, val) in dataItems  ">
+        <td class="icon"><div>{{dataItems[key].feedback_comments}}</div>
             <div>
-<a href="http://www.ebay.com/itm/{{dataItems[key].itemid}}">{{dataItems[key].title}}</a>
+<a href="http://www.ebay.com/itm/{{dataItems[key].item_id}}">{{dataItems[key].item_title}}</a>
             </div>
         </td>
-        <td>
-            <span>{{dataItems[key].users.name}}</span>
-            (<span>{{dataItems[key].users.score}}</span>)
-            <div>${{dataItems[key].price}}</div>
+        <td class="buyer_star">
+            <a href="http://www.ebay.com/usr/{{dataItems[key].buyer_info.buyer_name}}"><span>{{dataItems[key].buyer_info.buyer_name}}</span>
+            ( <span>{{dataItems[key].buyer_info.total_feedback_score}}</span><img src="{{dataItems[key].buyer_info.feedback_star}}" />
+            )</a>
+            <div>${{dataItems[key].item_price}}</div>
         </td>
-        <td>
-<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-        <span  class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+        <td class="offers">
+        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+        <span  class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
         <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
         </td>
     </tr>

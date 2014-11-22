@@ -95,43 +95,103 @@ img{
 var userApp = angular.module('userModel', []);
 
 userApp.controller('userController', function ($scope) {
-        $scope.feedback = "Feedback";
-        $scope.name = "From Sellers";
-        $scope.offers = "Offers";
-
-        $scope.dataItems = [
-{"users" : { "name" : "sri", "score" : "499", "star" : "y" },
-"comment" : "Hope to deal with you again. Thank you.",
-"title" : "Air Hogs RC AtmoSphere",
-"itemid" : "360839790794",
-"price" :  "33.00",
-"feedback" : { "status" : "Accepted", "reason" : "Full refund"}
-},
-{ "users" : { "name" : "rar", "score" : "509", "star" : "b" },
-"comment" : "Quick response and fast payment. Perfect! THANKS!!",
-"title" : "Boys' 16 Inch Rallye Pro Maxx Bike",
-"itemid" : "360839793794",
-"price" :  "29.00",
-"feedback" : { "status" : "Pending", "reason" : "--"}
-},
-{"users" : { "name" : "niz", "score" : "539", "star" : "r" },
-"comment" : "Hope to deal with you again. Thank you.",
-"title" : "Air Hogs RC AtmoSphere",
-"itemid" : "360839792794",
-"price" :  "56.00",
-"feedback" : { "status" : "Accepted", "reason" : "Full refund"}
-},
-{"users" : { "name" : "rar", "score" : "509", "star" : "b" },
-"comment" : "Quick response and fast payment. Perfect! THANKS!!",
-"title" : "Boys' 16 Inch Rallye Pro Maxx Bike",
-"itemid" : "360839798794",
-"price" :  "12.00",
-"feedback" : { "status" : "Pending", "reason" : "--"}
-}
-
-        ]
-
-});
+                   $scope.feedback = "Feedback";
+                   $scope.name = "From Buyers";
+                   $scope.offers = "Offers";
+                   
+                   $scope.dataItems = [ { "buyer_id" : "android_bot",
+                                       "buyer_info" : { "buyer_name" : "android_bot",
+                                       "feedback_star" : "http://p.ebaystatic.com/aw/pics/icon/iconRedStar_25x25.gif",
+                                       "logo_img_url" : "http://i.ebayimg.com/00/$(KGrHqVHJ!0E-bN+NOOmBPzk2WqCP!~~_7.JPG",
+                                       "member_since" : "May-09-99 in United States",
+                                       "total_feedback_score" : "1309"
+                                       },
+                                       "creation_date" : "Sep-30-09",
+                                       "feedback_comments" : "My daughter loves it! Thank you!",
+                                       "feedback_id" : "1234",
+                                       "feedback_rating" : "positive",
+                                       "id" : "1",
+                                       "item_id" : "171464416578",
+                                       "item_price" : "US $84.99",
+                                       "item_title" : "Chatsters - Pop Star Gabby Interactive Doll, Toys R Us Exclusive (#171464416578)",
+                                       "last_modified_date" : "Sep-30-09",
+                                       "offer_details" : { "discount" : "",
+                                       "offer_info" : "",
+                                       "offer_sent" : "No",
+                                       "offer_status" : "",
+                                       "refund_amount" : ""
+                                       },
+                                       "seller_id" : "toysrus",
+                                       "seller_info" : { "feedback_star" : "http://q.ebaystatic.com/aw/pics/icon/iconShootRed_25x25.gif",
+                                       "logo_img_url" : "http://i.ebayimg.com/15/!!f%29212w!%28U~$%28KGrHqIOKnMEz4Ohhmi5BNGg3%29TwR!~~_7.GIF",
+                                       "member_since" : "Sep-30-09 in United States",
+                                       "seller_name" : "toysrus",
+                                       "total_feedback_score" : "238,137"
+                                       }
+                                       },
+                                       { "buyer_id" : "ezofficetech",
+                                       "buyer_info" : { "buyer_name" : "ezofficetech",
+                                       "feedback_star" : "http://q.ebaystatic.com/aw/pics/icon/iconTealStar_25x25.gif",
+                                       "logo_img_url" : "http://p.ebaystatic.com/aw/social/avatar.png",
+                                       "    member_since" : "May-16-12 in United States",
+                                       "total_feedback_score" : "347"
+                                       },
+                                       "creation_date" : "Sep-30-10",
+                                       "feedback_comments" : "They sent the wrong figure and it was late. Very disappointed in Toysrus.",
+                                       "feedback_id" : "1235",
+                                       "feedback_rating" : "negative",
+                                       "id" : "2",
+                                       "item_id" : "171529168433",
+                                       "item_price" : "US $12.99",
+                                       "item_title" : "Power Rangers Mighty Morphin' Legacy Mighty Morphin Green Ranger (#171529168433)",
+                                       "last_modified_date" : "Sep-30-10",
+                                       "offer_details" : { "discount" : "",
+                                       "offer_info" : "Partial_Refund",
+                                       "offer_sent" : "Yes",
+                                       "offer_status" : "Pending",
+                                       "refund_amount" : "US $10"
+                                       },
+                                       "seller_id" : "toysrus",
+                                       "seller_info" : { "feedback_star" : "http://q.ebaystatic.com/aw/pics/icon/iconShootRed_25x25.gif",
+                                       "logo_img_url" : "http://i.ebayimg.com/15/!!f%29212w!%28U~$%28KGrHqIOKnMEz4Ohhmi5BNGg3%29TwR!~~_7.GIF",
+                                       "member_since" : "Sep-30-09 in United States",
+                                       "seller_name" : "toysrus",
+                                       "total_feedback_score" : "238137"
+                                       }
+                                       },
+                                       { "buyer_id" : "wutaday",
+                                       "buyer_info" : { "buyer_name" : "wutaday",
+                                       "feedback_star" : "http://q.ebaystatic.com/aw/pics/icon/iconTealStar_25x25.gif",
+                                       "logo_img_url" : "http://pics.ebaystatic.com/aw/pics/community/myWorld/imgBuddyBig7.gif",
+                                       "member_since" : "Oct-27-10 in United States",
+                                       "total_feedback_score" : "393"
+                                       },
+                                       "creation_date" : "Sep-30-11",
+                                       "feedback_comments" : "7 days late & in horrible condition. Good communication saved from neg. rating",
+                                       "feedback_id" : "1236",
+                                       "feedback_rating" : "neutral",
+                                       "id" : "3",
+                                       "item_id" : "171517651962",
+                                       "item_price" : "US $29.99",
+                                       "item_title" : "1:18 Sons of Anarchy Motorcycle - Jackson Teller 2003 Harley-Davidson (#171517651962)",
+                                       "last_modified_date" : "Sep-30-11",
+                                       "offer_details" : { "discount" : "30%",
+                                       "offer_info" : "Promotion",
+                                       "offer_sent" : "Yes",
+                                       "offer_status" : "Pending",
+                                       "refund_amount" : ""
+                                       },
+                                       "seller_id" : "toysrus",
+                                       "seller_info" : { "feedback_star" : "http://q.ebaystatic.com/aw/pics/icon/iconShootRed_25x25.gif",
+                                       "logo_img_url" : "http://i.ebayimg.com/15/!!f%29212w!%28U~$%28KGrHqIOKnMEz4Ohhmi5BNGg3%29TwR!~~_7.GIF",
+                                       "member_since" : "Sep-30-09 in United States",
+                                       "seller_name" : "toysrus",
+                                       "total_feedback_score" : "238137"
+                                       }
+                                       }
+                                       ];
+                   
+                   });
 
 
 
