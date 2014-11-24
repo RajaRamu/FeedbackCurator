@@ -17,12 +17,15 @@ sellerview : function (req, res){
 },
 
 sendoffer : function (req, res){
-	FeedbackCurator.find({'seller_id': req.param("sid")}).exec(function foundUsers(err, feedbacks){
-		if(err) return next(err);
-		res.json(feedbacks);
-		//res.view({feedbacks : feedbacks})
-	});
-	//res.view();
+	FeedbackCurator.update(
+			{'feedback_id': req.param("fid")},
+			{'offer_details' : req.param("od")
+		    }
+			).exec(function(err, feeds){
+			if(err) {return next(err);}
+			return res.send('success');
+			//res.view({feedbacks : feedbacks})
+		});
 },
 
 
@@ -36,11 +39,15 @@ buyerview : function (req, res){
 },
 
 acceptoffer : function (req, res){
-	FeedbackCurator.find({'seller_id': req.param("sid")}).exec(function foundUsers(err, feedbacks){
-		if(err) return next(err);
-		res.json(feedbacks);
-		//res.view({feedbacks : feedbacks})
-	});
+	FeedbackCurator.update(
+			{'feedback_id': req.param("fid")},
+			{'offer_details' : req.param("od")
+		    }
+			).exec(function(err, feeds){
+			if(err) {return next(err);}
+			return res.send('success');
+			//res.view({feedbacks : feedbacks})
+		});
 	//res.view();
 }
 
