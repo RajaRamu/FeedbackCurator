@@ -22,23 +22,23 @@
 <div class="dhead">
     <b>{{feedback}}</b>
 </div>
-<div class="ditems" ng-repeat="(key, val) in dataItems | filter: filterfn">
+<div class="ditems" ng-repeat="data in dataItems | filter: filterfn : orderBY">
         <div class="icon">
-            <div class="feedback" ng-class="{'negative': dataItems[key].feedback_rating == 'negative', 'neutral': dataItems[key].feedback_rating == 'neutral'}">
-                {{dataItems[key].feedback_comments}}</div>
+            <div class="feedback" ng-class="{'negative': data.feedback_rating == 'negative', 'neutral': data.feedback_rating == 'neutral'}">
+                {{data.feedback_comments}}</div>
             <div>
-<a href="http://www.ebay.com/itm/{{dataItems[key].item_id}}">{{dataItems[key].item_title}}</a>
+<a href="http://www.ebay.com/itm/{{data.item_id}}">{{data.item_title}}</a>
             </div>
             <div class="buyer_star">
                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                <a href="http://www.ebay.com/usr/{{dataItems[key].buyer_info.buyer_name}}"><span>{{dataItems[key].buyer_info.buyer_name}}</span>
-                    ( <span>{{dataItems[key].buyer_info.total_feedback_score}}</span><img src="{{dataItems[key].buyer_info.feedback_star}}" />
+                <a href="http://www.ebay.com/usr/{{data.buyer_info.buyer_name}}"><span>{{data.buyer_info.buyer_name}}</span>
+                    ( <span>{{data.buyer_info.total_feedback_score}}</span><img src="{{data.buyer_info.feedback_star}}" />
                     )</a>
-                <span class="price">${{dataItems[key].item_price}}</span>
+                <span class="price">${{data.item_price}}</span>
             </div>
         </div>
         
-        <div style="inline-block" class="offers"> <span ng-class="{'green': dataItems[key].offer_details.offer_sent == 'No', 'blue': dataItems[key].offer_details.offer_sent == 'Yes'}">{{dataItems[key].offer_details.offer_sent}}</span>
+        <div style="inline-block" class="offers"> <span ng-class="{'green': data.offer_details.offer_sent == 'No', 'blue': data.offer_details.offer_sent == 'Yes'}">{{data.offer_details.offer_sent}}</span>
         </div>
     </div>
 </div>
