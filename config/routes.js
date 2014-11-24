@@ -53,6 +53,7 @@ module.exports.routes = {
   "/leavefeedback":{
 	  view:"leavefeedback"
   },
+
   '/js': {
     js: 'sail.io'
 

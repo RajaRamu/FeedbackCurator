@@ -1,7 +1,43 @@
-<!DOCTYPE html>
-<head>
-</head>
-<body>
-Feedback curator
-</body>
-</html>
+
+ 
+    <!--SCRIPTS END-->
+<script src="/js/dependencies/sails.io.js"></script>
+    <script>
+ /*  io.socket.get("/feedbackcurator", function(resData, jwres) {console.log(resData);})
+   io.socket.on("feedbackcurator", function(event){console.log(event);})
+   */
+ /*   io.socket.get("/feedback", function(resData, jwres) {console.log(resData);})
+   io.socket.on("feedback", function(event){console.log(event);})*/
+/*
+io.socket.get("/offers", function(resData, jwres) {console.log(resData);})
+   io.socket.on("privateMessage", function(event){console.log(event);})
+*/
+    </script>
+    <script type="text/javascript">
+window.onload = function subscribeAndListen(){
+    // When the document loads, send a request to users.handleoffers
+    // The controller code will subscribe you to the model 'users'
+    io.socket.get('/feedbackcurator/sendoffer/');
+
+    // Listen for the event called 'user' emited by the publishCreate() method.
+    io.socket.on('feedbackcurator',function(obj){
+      if (obj.verb == 'created') {
+         var data = obj.data;
+         console.log('FeedbackId: '+data.feedback_id+' has been created.');
+      }
+    });
+};
+
+function makeNew(){
+
+    // Send the new users name to the 'handleoffers' action on the 'users' contoller
+
+    io.socket.get('/feedbackcurator/sendoffer/',{
+  	"fid":"1234",
+  	"od":{"discount":"","offer_info":"Partial_Refund","offer_sent": "Yes","offer_status": "Pending","refund_amount": "US $2"}}
+	);
+}
+
+</script>
+<div class="addButton" onClick="makeNew()">Click Me to add a new 'Walter' ! </div>
+ 
