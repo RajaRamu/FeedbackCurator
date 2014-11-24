@@ -50,10 +50,9 @@ module.exports.routes = {
   "/dataView" : {
     view: 'dataView'
   },
-
   "/leavefeedback":{
 	  view:"leavefeedback"
-
+  },
   '/js': {
     js: 'sail.io'
 
