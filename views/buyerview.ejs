@@ -61,51 +61,74 @@ img{
     padding: 10px;
 }
 
-table.dbTableView{
+div.dbTableView{
     width:100%;
-}
-table.dbTableView, table.dbTableView td, table.dbTableView th{
-    padding:5px;
-    border-collapse:collapse;
-    vertical-align:top;
-}
-table.dbTableView th{
-    border-bottom:1px solid #ddd;
-}
-table.dbTableView th, table.dbTableView td{
+    line-height:100%;
     font-size:12px;
 }
 
-table.dbTableView .icon{
+div.dbTableView .dhead{
+    border-bottom:1px solid #ddd;
+    margin-bottom:10px;
+}
+
+div.dbTableView .icon .feedback{
     padding-left:18px;
-    background:url(http://q.ebaystatic.com/aw/pics/icon/iconPos_16x16.gif) no-repeat left 10px;
+    background:url(http://q.ebaystatic.com/aw/pics/icon/iconPos_16x16.gif) no-repeat left 2px;
     background-size: 12px 12px;
 }
-
-table.dbTableView .buyer_star img{
-    width:20px; height:20px; vertical-align:top;
+div.dbTableView .icon .feedback.negative{
+    background:url(http://q.ebaystatic.com/aw/pics/icon/iconNeg_16x16.gif) no-repeat left 2px;
+    background-size: 12px 12px;
+}
+div.dbTableView .icon .feedback.neutral{
+    background:url(http://p.ebaystatic.com/aw/pics/icon/iconNeu_16x16.gif) no-repeat left 2px;
+    background-size: 12px 12px;
+}
+div.dbTableView .buyer_star{
+    padding-top:1px;
+}
+div.dbTableView .buyer_star img{
+    width:20px; height:20px; vertical-align:middle position:relative;top:-1px;
 }
 
-table.dbTableView .offers{
+div.dbTableView .offers{
+    position:absolute;
+    right:5px;
+    top:5px;
     min-width:100px;
+    text-align:right;
 }
+
+div.dbTableView .ditems{
+    border:1px solid #dedede;
+    border-radius:5px;
+    margin-bottom:10px;
+    position:relative;
+    padding:5px;
+    vertical-align:top;
+}
+div.dbTableView div{
+    padding:3px 0px;
+}
+
 @media only screen and (min-width : 320px) and (max-width : 480px) {
-    table.dbTableView .icon div{
+    div.dbTableView .icon div{
         width:200px;
         text-overflow: ellipsis;
         white-space:nowrap;
         overflow:hidden;
     }
-    table.dbTableView .icon{
+    div.dbTableView .icon{
         background-size: 10px 10px;
-        padding-left:15px;
+        padding-left:5px;
     }
-    table.dbTableView .icon .price{
+    div.dbTableView .icon .price{
         display:block;
     }
 }
 @media only screen and (min-width : 320px) and (max-width : 480px) {
-    table.dbTableView .offers{
+    div.dbTableView .offers{
         min-width:60px;
     }
 }
@@ -147,9 +170,14 @@ table.dbTableView .offers{
 }
 .offers .green{
     background-color:green;
+    width:40px;
+    display:inline-block;
 }
-.offers .blue{
-    background-color:blue;
+.offers .blue, .offers .green{
+    background-color:gray;
+    width:40px;
+    display:inline-block;
+    text-align:center;
 }
 </style>
 </head>
@@ -189,7 +217,7 @@ table.dbTableView .offers{
 var userApp = angular.module('userModel', []);
 
 userApp.controller('userController', function ($scope) {
-                   $scope.feedback = "Feedback";
+                   $scope.feedback = "Feedback revised";
                    $scope.name = "From Buyers";
                    $scope.offers = "Offers";
                    
@@ -285,9 +313,7 @@ userApp.controller('userController', function ($scope) {
                                        }
                                        ];
                    
-                   $scope.filterfunc = function(element){
-                            return element.name.match(/^Ma/) ? true : false;
-                   }
+                   
                    
                    });
 

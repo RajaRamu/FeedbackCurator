@@ -3,8 +3,9 @@
 
 <div class="filter_group">
     <span class="span5">{{dataItems[0].seller_info.total_feedback_score}} Feedback received</span>
+    <!-- btn-group -->
 <div class="input-group filter">
-    <input type="text" class="form-control" placeholder="Filter title" ng-model="filterfn.$">
+    <input type="text" class="form-control" placeholder="Filter title" ng-model="filterfn">
         <div class="input-group-btn">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Period <span class="caret"></span></button>
             <ul class="dropdown-menu dropdown-menu-right" role="menu">
@@ -17,16 +18,14 @@
         </div><!-- /btn-group -->
         </div>
 </div>
-<table class="dbTableView" cellpadding="0" cellspacing="0" border="0">
-<thead>
-<th>{{feedback}}</th>
-<th>{{offers}}</th>
-</thead>
-
-<tbody>
-<tr ng-repeat="(key, val) in dataItems | filter: filterfn : strict">
-        <td class="icon">
-            <div>{{dataItems[key].feedback_comments}}</div>
+<div class="dbTableView">
+<div class="dhead">
+    <b>{{feedback}}</b>
+</div>
+<div class="ditems" ng-repeat="(key, val) in dataItems | filter: filterfn">
+        <div class="icon">
+            <div class="feedback" ng-class="{'negative': dataItems[key].feedback_rating == 'negative', 'neutral': dataItems[key].feedback_rating == 'neutral'}">
+                {{dataItems[key].feedback_comments}}</div>
             <div>
 <a href="http://www.ebay.com/itm/{{dataItems[key].item_id}}">{{dataItems[key].item_title}}</a>
             </div>
@@ -37,17 +36,10 @@
                     )</a>
                 <span class="price">${{dataItems[key].item_price}}</span>
             </div>
-        </td>
+        </div>
         
-        <td class="offers"> <span ng-class="{'green': dataItems[key].offer_details.offer_sent == 'No', 'blue': dataItems[key].offer_details.offer_sent == 'Yes'}">{{dataItems[key].offer_details.offer_sent}}</span>
-        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-        <span  class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-        <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
-        </td>
-    </tr>
-</tbody>
-<thead>
-</tfoot>
-</tfoot>
-
+        <div style="inline-block" class="offers"> <span ng-class="{'green': dataItems[key].offer_details.offer_sent == 'No', 'blue': dataItems[key].offer_details.offer_sent == 'Yes'}">{{dataItems[key].offer_details.offer_sent}}</span>
+        </div>
+    </div>
+</div>
 </div>
