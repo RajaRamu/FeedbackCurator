@@ -7,7 +7,7 @@
 <div class="input-group filter">
     <input type="text" class="form-control" placeholder="Filter title" ng-model="filterfn">
         <div class="input-group-btn">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Period <span class="caret"></span></button>
+            <button ng-click="getBuyerView" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Period <span class="caret"></span></button>
             <ul class="dropdown-menu dropdown-menu-right" role="menu">
                 <li><a href="#">Past 1 month</a></li>
                 <li><a href="#">Past 6 months</a></li>
@@ -22,7 +22,7 @@
 <div class="dhead">
     <b>{{feedback}}</b>
 </div>
-<div class="ditems" ng-repeat="data in dataItems | filter: filterfn : orderBY">
+<div class="ditems" ng-repeat="data in dataItems | filter: filterfn">
         <div class="icon">
             <div class="feedback" ng-class="{'negative': data.feedback_rating == 'negative', 'neutral': data.feedback_rating == 'neutral'}">
                 {{data.feedback_comments}}</div>
@@ -38,8 +38,27 @@
             </div>
         </div>
         
-        <div style="inline-block" class="offers"> <span ng-class="{'green': data.offer_details.offer_sent == 'No', 'blue': data.offer_details.offer_sent == 'Yes'}">{{data.offer_details.offer_sent}}</span>
+        <div style="inline-block" class="offers">
+        <div id="overlay_funds">
+            <div class="btn-group">
+                <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                    Offer Details <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li ng-click="showHide" ng-class="{'no-disabled': data.offer_details.offer_sent == 'No', 'disabled': data.offer_details.offer_sent == 'Yes'}"><a href="">Discount</a></li>
+                   <li ng-click="show_refund=true" ng-class="{'no-disabled': data.offer_details.offer_sent == 'No', 'disabled': data.offer_details.offer_sent == 'Yes'}" ><a href="">Partial Refund</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <input ng-show="show_discount" placeholder="Discount"></input>
+                <input ng-show="show_refund" placeholder="Partial refund"></input>
+            </div>
+            <div></div>
         </div>
+        </div>
+        
+        
     </div>
 </div>
 </div>
