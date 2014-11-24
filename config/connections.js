@@ -58,7 +58,7 @@ module.exports.connections = {
   ***************************************************************************/
   someMongodbServer: {
     adapter: 'sails-mongo',
-    host: 'localhost',
+    host: 'd-sjc-00530677.corp.ebay.com',
     port: 27017,
     // user: 'username',
     // password: 'password',
