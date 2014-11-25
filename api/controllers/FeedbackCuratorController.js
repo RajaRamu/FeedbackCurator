@@ -10,8 +10,9 @@ module.exports = {
 sellerview : function (req, res){
 	FeedbackCurator.find({'seller_id': req.param("sid")}).exec(function foundUsers(err, feedbacks){
 		if(err) return next(err);
-		res.json(feedbacks);
-		//res.view({feedbacks : feedbacks})
+		//res.json(feedbacks);
+		res.type("html");
+		res.view("buyerview" , {feedback:feedbacks});
 	});
 	//res.view();
 },
