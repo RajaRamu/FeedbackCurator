@@ -68,7 +68,9 @@ sendoffer : function (req, res){
 buyerview : function (req, res){
 	FeedbackCurator.find({'buyer_id': req.param("bid")}).exec(function foundUsers(err, feedbacks){
 		if(err) return next(err);
-		res.json(feedbacks);
+		//res.json(feedbacks);
+		res.type("html");
+		res.view("buyerview1" , {feedback:feedbacks});
 	});
 },
 

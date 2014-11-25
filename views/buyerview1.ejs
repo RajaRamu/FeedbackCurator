@@ -3,11 +3,14 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width" />
-<title> {{ name }} </title>
+
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+<script>
+    var pageData = <%- JSON.stringify(feedback)%>;
+    </script>
 
 <style>
 html body {
@@ -196,10 +199,10 @@ div.dbTableView div{
 
 
 <div class="sub_view mbm50">
-    <div ng-include="'dataView'"></div>
+    <div ng-include="'../dataView'"></div>
 </div>
 <div class="sub_view">
-    <div ng-include="'graphView'"></div>
+    <div ng-include="'../graphView'"></div>
 </div>
 </div>
 </form>
@@ -210,10 +213,76 @@ div.dbTableView div{
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
 
+<script>
+function graph() {
+
+    // Radialize the colors
+    Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
+        return {
+            radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+            stops: [
+                [0, color],
+                [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+            ]
+        };
+    });
+
+    // Build the chart
+    $('#container-graph').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: 'Feedback for past 12 months'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    },
+                    connectorColor: 'silver'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Browser share',
+            data: [
+                ['Positive',   2500],
+                ['Neutral',       819],
+                {
+                    name: 'Negative',
+                    y: 1191,
+                    sliced: true,
+                    selected: true
+                }
+       
+            ]
+        }]
+    });
+}
+
+window.onload = function(){
+  setTimeout(graph, 1000);
+}
+
+</script>
 <!-- Load the app module and its classes. -->
 <script type="text/javascript">
-
+ 
 var userApp = angular.module('userModel', []);
 
         
@@ -222,8 +291,8 @@ userApp.controller('userController', function ($scope, feedbackService) {
                    $scope.name = "From Buyers";
                    $scope.offers = "Offers";
                    
-                   loadRemoteData();
-                   $scope.dataItems = '';
+                   //loadRemoteData();
+                   $scope.dataItems = pageData;
                    
                    function loadRemoteData() {
                         feedbackService.getSellerView().then( function( data ) {
@@ -233,8 +302,19 @@ userApp.controller('userController', function ($scope, feedbackService) {
                    }
                    $scope.show_discount = false;
                    $scope.show_refund = false;
+                   
+                   $scope.sendOffer = function(id){
+                    var data, that = $('#'+id), refund = that.prev(), discount = refund.prev();
+                        data = 'fid='+id+'&discount='+discount.val()+'&offer_info=dicsount&offer_sent=Yes&offer_status=pending&refund_amount';
+                   feedbackService.updateInfo(data).then( function( data ) {
+                                                        console.log(data);
+                                                       
+                                                        });
+                   }
+                   
                    $scope.showHide = function(){
-                    alert(this);
+                   
+                   
                    }
                    
                    });
@@ -246,8 +326,9 @@ userApp.controller('userController', function ($scope, feedbackService) {
                                // Return public API.
                                return({
                                       getBuyerView: getBuyerView,
-                                       getSellerView: getSellerView,
-                                      getBuyerFeedback: getBuyerFeedback
+                                      getSellerView: getSellerView,
+                                      getBuyerFeedback: getBuyerFeedback,
+                                      updateInfo: updateInfo
                                       });
                                
                                
@@ -257,6 +338,23 @@ userApp.controller('userController', function ($scope, feedbackService) {
                                
                                
                               
+                                   function updateInfo( data ) {
+                                   
+                                   var request = $http({
+                                                       method: "get",
+                                                       url: "http://localhost:1337/feedbackcurator/sendoffer?" + data,
+                                                       params: {
+                                                       action: "get"
+                                                       },
+                                                       data: {
+                                                       name: data
+                                                       }
+                                                       });
+                                   
+                                   return( request.then( handleSuccess, handleError ) );
+                                   
+                                   }
+                                   
                                function getBuyerView( id ) {
                                
                                var request = $http({
@@ -338,6 +436,8 @@ userApp.controller('userController', function ($scope, feedbackService) {
                                function handleSuccess( response ) { return( response.data );  }
                                
                                });
+                               
+                               
 
 
 
