@@ -52,6 +52,8 @@ module.exports.routes = {
   },
   "/leavefeedback":{
 	  view:"leavefeedback"
+  },"/mybuyerview" : {
+    view: 'mybuyerview'
   },
 
   '/js': {
