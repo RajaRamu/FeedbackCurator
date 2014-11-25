@@ -18,12 +18,17 @@ window.onload = function subscribeAndListen(){
     // When the document loads, send a request to users.handleoffers
     // The controller code will subscribe you to the model 'users'
     io.socket.get('/feedbackcurator/sendoffer/');
+    io.socket.get('/feedbackcurator/acceptoffer/');
 
     // Listen for the event called 'user' emited by the publishCreate() method.
     io.socket.on('feedbackcurator',function(obj){
       if (obj.verb == 'created') {
          var data = obj.data;
-         console.log('FeedbackId: '+data.feedback_id+' has been created.');
+         if(data.type == "sendoffer"){
+			alert("send offer triggered!!");
+         } else if(data.type == "acceptoffer"){
+         		alert("accept offer triggered!!");
+         }
       }
     });
 };
@@ -34,10 +39,28 @@ function makeNew(){
 
     io.socket.get('/feedbackcurator/sendoffer/',{
   	"fid":"1234",
-  	"od":{"discount":"","offer_info":"Partial_Refund","offer_sent": "Yes","offer_status": "Pending","refund_amount": "US $2"}}
-	);
+  	"discount":"",
+  	"offer_info":"Partial_Refund",
+  	"offer_sent": "Yes",
+  	"offer_status": "Pending",
+  	"refund_amount": "US $2"});
+
+}
+function acceptOffer(){
+
+    // Send the new users name to the 'handleoffers' action on the 'users' contoller
+
+    io.socket.get('/feedbackcurator/acceptoffer/',
+  	{"fid":"1234",
+  	"discount":"",
+  	"offer_info":"Partial_Refund",
+  	"offer_sent": "Yes",
+  	"offer_status": "Pending",
+  	"refund_amount": "US $2"});
 }
 
 </script>
-<div class="addButton" onClick="makeNew()">Click Me to add a new 'Walter' ! </div>
+<div class="addButton" onClick="makeNew()">Send offer</div>
  
+
+<div class="addButton" onClick="acceptOffer()">Accept offer</div>
