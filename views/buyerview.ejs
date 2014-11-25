@@ -224,6 +224,17 @@ div.dbTableView div{
 .offers.s_d .f, .offers.s_r .r{
     display:block;
 }
+
+.offers .tweet{
+    padding:3px;
+    background:gray;
+    width:auto;
+    border-radius:2px;
+    text-align:center;
+    color:#fff;
+    margin-top:5px;
+    
+}
 </style>
 </head>
 <body>
@@ -357,9 +368,11 @@ userApp.controller('userController', function ($scope, feedbackService) {
                    data = 'fid='+$(id.target).attr('id')+'&discount='+(ds ? funds.val() : '')+'&offer_info='+(ds ? "discount" : "refund")+'&offer_sent=Yes&offer_status=pending&refund_amount='+(rf ? funds.val() : '');
                    
                    
-                        feedbackService.updateInfo(data).then( function( data ) {
-                                                        console.log(data);
-                                                       
+                        feedbackService.updateInfo(data).then( function(  ) {
+                                                              var div = $('<div class="tweet"/>'), target =  $(id.target).parents('.offers'), select = target.find('select').first();
+                                                              select.attr('disabled','true');
+                                                              target.removeClass('s_d').removeClass('s_r');
+                                                              div.html('Offer Sent').insertAfter(select);
                                                         });
                    }
                    
