@@ -99,11 +99,11 @@ if (req.param("fid") != null && req.isSocket){
  	var refundAmount = req.param("refund_amount");
 	FeedbackCurator.update(
 			{'feedback_id': feedbackId},
-			{'offer_details.discount' : discount,
-			 'offer_details.offer_info' : offerInfo,
-			 'offer_details.offer_sent' : offerSent,
-			 'offer_details.offer_status' : offerStatus,
-			 'offer_details.refund_amount' : refundAmount,
+			// {'offer_details.discount' : discount,
+			//  'offer_details.offer_info' : offerInfo,
+			//  'offer_details.offer_sent' : offerSent,
+			{'offer_details.offer_status' : "Accepted",
+			// 'offer_details.refund_amount' : refundAmount,
 		    }
 			).exec(function(err, feeds){
 			if(err) {return next(err);}
@@ -120,11 +120,11 @@ if (req.param("fid") != null && req.isSocket){
 
 	FeedbackCurator.update(
 			{'feedback_id': req.param("fid")},
-			{'offer_details.discount' : req.param("discount"),
-			 'offer_details.offer_info' : req.param("offer_info"),
-			 'offer_details.offer_sent' : req.param("offer_sent"),
-			 'offer_details.offer_status' : req.param("offer_status"),
-			 'offer_details.refund_amount' : req.param("refund_amount"),
+			// {'offer_details.discount' : req.param("discount"),
+			//  'offer_details.offer_info' : req.param("offer_info"),
+			//  'offer_details.offer_sent' : req.param("offer_sent"),
+			{'offer_details.offer_status' : "Accepted",
+			 //'offer_details.refund_amount' : req.param("refund_amount"),
 		    }
 			).exec(function(err, feeds){
 			if(err) {return next(err);}
