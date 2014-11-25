@@ -10,6 +10,9 @@
     </script>
     <link rel="stylesheet" type="text/css" href="http://ir.ebaystatic.com/v4css/z/md/10smxl4d0e4xldmlpxltti1vg.css#FeedbackApp_LeaveFeedback_e899_Ear_en_US">
     <style type="text/css">
+    #spn_formSave,#formSave{
+        display: none;
+    }
         .bn-w,
         .bn-b,
         .bn-b input,
@@ -997,7 +1000,7 @@
                             })();
                         </script>
                         <div></div>
-                 
+                 <div id="iframe"></div>
        
                                                         <div class="fbcontent">
                                                             <div class="fc-fr">
@@ -1235,7 +1238,7 @@
                             </td>
                             </tr>
                             <tr>
-                            <td><table border="0" cellpadding="0" cellspacing="0" style="margin-left:0px;margin-top:0px"><tbody><tr><td style="padding-right:0px;" nowrap="nowrap" valign="middle" id="v4-36"><div id="rabOverlayPanel1Oly_Outer" class="g-hdn" style="visibility : hidden;width:400px"><div id="cnrabOverlayPanel1"><div class="ov-s" id="hcrabOverlayPanel1"> </div><div><div style="width:400px;;white-space: pre-wrap">You started to report this buyer but didn't submit the report yet. What would you like to do first?<input type="hidden" id="focusRABDivId" value=""></div></div><div class="ov-ftr"><div><table><tbody><tr><td><b id="v4-34" class="bn-w bn-m bn-pad psb-S"><i>Report this Buyer</i><span id="spn_v4-34" class="bn-b psb-b psb-S"><input id="but_v4-34" name="leavefeedbackfirst" value="Report this Buyer" title="" type="button"><b id="txt_v4-34">Report this Buyer</b></span></b></td><td style="font-weight:bold;padding-right:10px;">|</td><td><a href="javascript:;" id="v4-35">Leave Feedback first</a></td></tr></tbody></table></div></div><a id="rabOverlayPanel1_stA" href="javascript:;" class="g-hdn">Start of Layer</a><a id="rabOverlayPanel1_enA" href="javascript:;" class="g-hdn">End of Layer</a></div></div><input type="hidden" value="OrabOverlayPanel1"><b id="formSave" class="bn-w bn-m bn-pad pb-L"><i>Leave feedback</i><span id="spn_formSave" class="bn-b pb-b pb-L"><input id="but_formSave" name="" value="Leave feedback" title="" type="button" formid="formSave"><b id="txt_formSave">Leave feedback</b></span></b></td><td style="padding-left:0px" id="learnMoreId" nowrap="nowrap" valign="middle"> </td></tr></tbody></table></td>
+                            <td><table border="0" cellpadding="0" cellspacing="0" style="margin-left:0px;margin-top:0px"><tbody><tr><td style="padding-right:0px;" nowrap="nowrap" valign="middle" id="v4-36"><div id="rabOverlayPanel1Oly_Outer" class="g-hdn" style="visibility : hidden;width:400px"><div id="cnrabOverlayPanel1"><div class="ov-s" id="hcrabOverlayPanel1"> </div><div><div style="width:400px;;white-space: pre-wrap">You started to report this buyer but didn't submit the report yet. What would you like to do first?<input type="hidden" id="focusRABDivId" value=""></div></div><div class="ov-ftr"><div><table><tbody><tr><td><b id="v4-34" class="bn-w bn-m bn-pad psb-S"><i>Report this Buyer</i><span id="spn_v4-34" class="bn-b psb-b psb-S"><input id="but_v4-34" name="leavefeedbackfirst" value="Report this Buyer" title="" type="button"><b id="txt_v4-34">Report this Buyer</b></span></b></td><td style="font-weight:bold;padding-right:10px;">|</td><td><a href="javascript:;" id="v4-35">Leave Feedback first</a></td></tr></tbody></table></div></div><a id="rabOverlayPanel1_stA" href="javascript:;" class="g-hdn">Start of Layer</a><a id="rabOverlayPanel1_enA" href="javascript:;" class="g-hdn">End of Layer</a></div></div><input type="hidden" value="OrabOverlayPanel1"><b id="formSave" class="bn-w bn-m bn-pad pb-L"><i>Leave feedback</i><span id="spn_formSave" class="bn-b pb-b pb-L"><input id="but_formSave" name="" value="Leave feedback" title="" type="button" formid="formSave"><b id="txt_formSave">Lea</b></span></b></td><td style="padding-left:0px" id="learnMoreId" nowrap="nowrap" valign="middle"> </td></tr></tbody></table></td>
                             </tr>
                             </table>
 
@@ -3228,7 +3231,16 @@
     <script>
     //var leavefeedback = document.querySelectorAll("#but_formSave");
       document.getElementById("but_formSave").addEventListener('click', function(event) {
-        $('#myModal').modal({ show: false})
+
+     /*   var win = document.getElementById("iframe").contentWindow;
+       win.postMessage(
+                        "closemodel",
+                        "/leavefeedback"
+                );
+                event.preventDefault();
+                */
+
+                window.parent.postMessage("closemodel", '/leavefeedback');
     });
 
     </script>

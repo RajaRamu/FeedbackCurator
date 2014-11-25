@@ -257,6 +257,8 @@ body .modal-dialog{
          <iframe src="/leavefeedback" width="700" height="400" frameborder="0" allowtransparency="true"></iframe>        </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Leave feedback</button>
+      
       
       </div>
     </div>
@@ -268,7 +270,7 @@ body .modal-dialog{
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
+<script src="/js/dependencies/sails.io.js"></script>
 
 
 <!-- Load the app module and its classes. -->
@@ -478,6 +480,16 @@ userApp.controller('userController', function ($scope, feedbackService) {
 
 
 </script>
+<script>
+window.addEventListener("message", function(e){
+       
+ debugger;
+     
+        $('#myModal').modal({ show: false})
+
+}, false);
+</script>
+
 
 
 </body>
