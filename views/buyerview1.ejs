@@ -25,17 +25,13 @@
                      if(data.type == "sendoffer"){
                         document.getElementById('show_alert').style.display = 'block';
                         document.querySelector('.alert-link').innerHTML =
-                     "Heads up! toysrus offered "+ data.offerInfo +" of $"+ data.refundAmount + " <a onClick='showOpen("+data.feedback_id+")' href='javascript:;'> accept offer</a>";
+                     "Heads up! toysrus offered "+ data.offerInfo +" of $"+ data.refundAmount + " <a href='"+document.URL+"'> accept offer</a>";
                      
                      }
                      }
                      });
     };
 
-function showOpen(id){
-    var url = document.URL + '#' + id;
-    window.open(url, '_self');
-}
     </script>
 
 <style>
