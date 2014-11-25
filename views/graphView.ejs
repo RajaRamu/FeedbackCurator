@@ -39,29 +39,24 @@
         </div>
         
         <div style="inline-block" class="offers">
-            <div id="overlay_funds" class="">
-            <div class="btn-group">
-                <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                    Offer Details <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li ng-class="{'no-disabled': data.offer_details.offer_sent == 'No', 'disabled': data.offer_details.offer_sent == 'Yes'}"><a ng-click="discount_show = !discount_show" href="">Discount</a></li>
-                   <li ng-class="{'no-disabled': data.offer_details.offer_sent == 'No', 'disabled': data.offer_details.offer_sent == 'Yes'}" ><a ng-click="refund_show = !refund_show"href="">Partial Refund</a></li>
-                </ul>
+            <div id="offerInfo">
+                <select class="offersLayout">
+                    <option selected="selected" value="">-</option>
+                    <option value="">Discount</option>
+                    <option value="">Partial refund</option>
+                </select>
+               <div class="f">
+                   
+                    <input id="discount" class="form-control" placeholder="Discount"></input>
+                    <button class="sendOffer btn btn-default" ng-click="sendOffer($event)" id="{{data.feedback_id}}">Send Offer</button>
+                </div>
+                <div class="r">
+                    <input id="refund_show" class="form-control" placeholder="Partial refund"></input>
+                    <button class="sendOffer btn btn-default" ng-click="sendOffer($event)" id="{{data.feedback_id}}">Send Offer</button>
+                </div>
+                
             </div>
             
-            <div id="offerInfo">
-                <div ng-show="discount_show">
-                <input id="discount" placeholder="Discount"></input>
-                <button class="sendOffer" ng-click="sendOffer(data.feedback_id)" id="{{data.feedback_id}}">Send Offer</button>
-                </div>
-                <div ng-show="refund_show">
-                <input id="refund_amount" placeholder="Partial refund"></input>
-                <button class="sendOffer" ng-click="sendOffer(data.feedback_id)" id="{{data.feedback_id}}">Send Offer</button>
-                </div>
-            </div>
-            <div></div>
-        </div>
         </div>
         
         

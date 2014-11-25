@@ -8,6 +8,26 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <script>
+        window.onload = function subscribeAndListen(){
+            // When the document loads, send a request to users.handleoffers
+            // The controller code will subscribe you to the model 'users'
+            // io.socket.get('/feedbackcurator/sendoffer/');
+            io.socket.get('/feedbackcurator/acceptoffer/');
+            
+            // Listen for the event called 'user' emited by the publishCreate() method.
+            io.socket.on('feedbackcurator',function(obj){
+                         if (obj.verb == 'created') {
+                         var data = obj.data;
+                         /*     if(data.type == "sendoffer"){
+                          alert("send offer triggered!!");
+                          } else*/ if(data.type == "acceptoffer"){
+                         alert("accept offer triggered!!");
+                         }
+                         }
+                         });
+        };
+    </script>
 <script>
     var pageData = <%- JSON.stringify(feedback)%>;
     </script>
@@ -183,6 +203,27 @@ div.dbTableView div{
     display:inline-block;
     text-align:center;
 }
+.offers .f, .offers .r{
+    z-index:1000;
+    margin-top:2px;
+    padding:10px;
+    background:#f9f9f9;
+    border:1px solid #eee;
+    border-radius:5px;
+    width:270px;
+    
+}
+
+.offers input{
+    width:150px;
+    float:left;
+}
+.offers .f, .offers .r{
+    display:none;
+    }
+.offers.s_d .f, .offers.s_r .r{
+    display:block;
+}
 </style>
 </head>
 <body>
@@ -283,7 +324,7 @@ window.onload = function(){
 <!-- Load the app module and its classes. -->
 <script type="text/javascript">
  
-var userApp = angular.module('userModel', []);
+var test,userApp = angular.module('userModel', []);
 
         
 userApp.controller('userController', function ($scope, feedbackService) {
@@ -291,7 +332,7 @@ userApp.controller('userController', function ($scope, feedbackService) {
                    $scope.name = "From Buyers";
                    $scope.offers = "Offers";
                    
-                   //loadRemoteData();
+                   selectedFields();
                    $scope.dataItems = pageData;
                    
                    function loadRemoteData() {
@@ -300,20 +341,44 @@ userApp.controller('userController', function ($scope, feedbackService) {
                              $scope.dataItems = data;
                         });
                    }
+                   $scope.showOffers = {};
                    $scope.show_discount = false;
                    $scope.show_refund = false;
                    
                    $scope.sendOffer = function(id){
-                    var data, that = $('#'+id), refund = that.prev(), discount = refund.prev();
-                        data = 'fid='+id+'&discount='+discount.val()+'&offer_info=dicsount&offer_sent=Yes&offer_status=pending&refund_amount';
-                   feedbackService.updateInfo(data).then( function( data ) {
+                    var ds = false, rf = false, data, that = $(id.target), funds = that.prev();
+                   
+                   
+                   if(funds.attr('id') == 'discount'){
+                    ds = true;
+                   }else if(funds.attr('id') == 'refund_show'){
+                    rf = true;
+                   }
+                   data = 'fid='+$(id.target).attr('id')+'&discount='+(ds ? funds.val() : '')+'&offer_info='+(ds ? "discount" : "refund")+'&offer_sent=Yes&offer_status=pending&refund_amount='+(rf ? funds.val() : '');
+                   
+                   
+                        feedbackService.updateInfo(data).then( function( data ) {
                                                         console.log(data);
                                                        
                                                         });
                    }
                    
-                   $scope.showHide = function(){
-                   
+                   function selectedFields(){
+                        setTimeout( function(){
+                              
+                              $('.offersLayout').bind('change',function(){
+                                                      var parents, selected = $(this).find('option:selected').text();
+                                                      parents = $(this).parents('.offers').first();
+                                                      if(selected == 'Discount'){
+                                                        parents.addClass('s_d');
+                                                      parents.removeClass('s_r');
+                                                      }else if(selected == 'Partial refund'){
+                                                        parents.addClass('s_r');
+                                                        parents.removeClass('s_d');
+                                                      }else{
+                                                      parents.removeClass('s_r').removeClass('s_d');
+                                                    }
+                                                      })}, 1000);
                    
                    }
                    
@@ -444,5 +509,6 @@ userApp.controller('userController', function ($scope, feedbackService) {
 
 </script>
 
+    
 </body>
 </html>
