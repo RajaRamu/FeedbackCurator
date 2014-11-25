@@ -40,13 +40,12 @@
         
         <div style="inline-block" class="offers">
             <div id="offerInfo">
-                <select class="offersLayout">
+                <select class="offersLayout" status="{{data.offer_details.offer_status}}" data="{{data.offer_details.offer_info}}" ng-disabled="{{data.offer_details.offer_sent == 'Yes'}}">
                     <option selected="selected" value="">-</option>
                     <option value="">Discount</option>
                     <option value="">Partial refund</option>
                 </select>
                <div class="f">
-                   
                     <input id="discount" class="form-control" placeholder="Discount"></input>
                     <button class="sendOffer btn btn-default" ng-click="sendOffer($event)" id="{{data.feedback_id}}">Send Offer</button>
                 </div>

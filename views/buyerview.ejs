@@ -345,7 +345,7 @@ userApp.controller('userController', function ($scope, feedbackService) {
                    
                    selectedFields();
                    $scope.dataItems = pageData;
-                   
+                   getOffersInfo();
                    function loadRemoteData() {
                         feedbackService.getSellerView().then( function( data ) {
                                                              console.log(data);
@@ -374,6 +374,27 @@ userApp.controller('userController', function ($scope, feedbackService) {
                                                               target.removeClass('s_d').removeClass('s_r');
                                                               div.html('Offer Sent').insertAfter(select);
                                                         });
+                   }
+                   
+                   function getOffersInfo(){
+                   setTimeout(function(){
+                                var select_dis = $('select[ng-disabled=true]');
+                                for(var j= 0, size = select_dis.length; j < size; j++){
+                                    var div = $('<div class="tweet"/>'), r = $(select_dis[j]).attr('data') == 'refund', d = $(select_dis[j]).attr('data') == 'discount';
+                              
+                                    if(r){
+                                        select_dis[j][2].selected = true;
+                              
+                                    }else if(d){
+                                        select_dis[j][1].selected = true;
+                              
+                                    }
+                                    div.html( $(select_dis[j]).attr('status') ).insertAfter($(select_dis[j]));
+                                    $(select_dis[j]).attr('disabled','true');
+                                }
+                              
+                              },1000);
+                   
                    }
                    
                    function selectedFields(){
