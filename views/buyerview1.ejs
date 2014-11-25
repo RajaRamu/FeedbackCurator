@@ -183,6 +183,11 @@ div.dbTableView div{
     display:inline-block;
     text-align:center;
 }
+body .modal-dialog{
+    /* new custom width */
+    width: 800px;
+  
+}
 </style>
 </head>
 <body>
@@ -207,6 +212,26 @@ div.dbTableView div{
 </div>
 </form>
 
+<!-- Button trigger modal -->
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Revise feedback</h4>
+      </div>
+      <div class="modal-body">
+         <iframe src="/leavefeedback" width="700" height="400" frameborder="0" allowtransparency="true"></iframe>        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- Load jQuery, BootStrap and AngularJS from the CDN. -->
@@ -248,10 +273,20 @@ userApp.controller('userController', function ($scope, feedbackService) {
                                                         });
                    }
                    
-                   $scope.showHide = function(){
-                   
-                   
+                   $scope.acceptOffer = function(id){
+              
+                    // alert(id);
+                     io.socket.get('/feedbackcurator/acceptoffer/',
+                    {"fid":id});
+                    $('#myModal').modal('show');
+                       $("#"+id).addClass("disabled");
+                    
+
+
+
+
                    }
+                 
                    
                    });
                    
@@ -373,12 +408,31 @@ userApp.controller('userController', function ($scope, feedbackService) {
                                
                                });
                                
-                               
 
+
+
+                               window.onload = function subscribeAndListen(){
+    // When the document loads, send a request to users.handleoffers
+    // The controller code will subscribe you to the model 'users'
+    io.socket.get('/feedbackcurator/sendoffer/');
+   // io.socket.get('/feedbackcurator/acceptoffer/');
+
+    // Listen for the event called 'user' emited by the publishCreate() method.
+    io.socket.on('feedbackcurator',function(obj){
+      if (obj.verb == 'created') {
+         var data = obj.data;
+         if(data.type == "sendoffer"){
+             alert("send offer triggered!!");
+         } 
+      }
+    });
+};
+          
 
 
 
 </script>
+
 
 </body>
 </html>
