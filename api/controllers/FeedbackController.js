@@ -17,11 +17,7 @@ module.exports = {
 	updatefeed : function (req, res){
 		Feedback.update(
 			{'feedback_id': req.param("fid")},
-			{'feedback_Question.How accurate was the item description' : req.param("q1"),
-			'feedback_Question.How quickly did the seller ship the item' : req.param("q2"),
-			'feedback_Question.How reasonable were the shipping and handling charges' : req.param("q3"),
-			"feedback_Question.How satisfied were you with the seller's communication" : req.param("q4"),
-			 'feedback_comments' : req.param("fc"),
+			{'feedback_comments' : req.param("fc"),
 			 'feedback_rating' : req.param("fr")
 		    }
 			).exec(function(err, feeds){
