@@ -234,6 +234,13 @@ div.dbTableView div{
 <div class="sub_view mbm50">
     <div ng-include="'../dataView'"></div>
 </div>
+
+<div class="alert alert-info" role="alert" id="show_alert" style="display:none;">
+    <a href="#" class="alert-link">
+        
+    </a>
+</div>
+
 <div class="sub_view">
     <div ng-include="'../graphView'"></div>
 </div>
@@ -356,6 +363,11 @@ userApp.controller('userController', function ($scope, feedbackService) {
                    sodata.offer_sent = "Yes";
                    sodata.offer_status = "pending";
                    sodata.refund_amount = (rf ? funds.val() : '');
+                   
+                   var div = $('<div class="tweet"/>'), target =  $(id.target).parents('.offers'), select = target.find('select').first();
+                   select.attr('disabled','true');
+                   target.removeClass('s_d').removeClass('s_r');
+                   div.html('Offer Sent').insertAfter(select);
 
                         feedbackService.updateInfo(sodata).then( function(  ) {
                                                               var div = $('<div class="tweet"/>'), target =  $(id.target).parents('.offers'), select = target.find('select').first();
@@ -543,12 +555,18 @@ userApp.controller('userController', function ($scope, feedbackService) {
             
             // Listen for the event called 'user' emited by the publishCreate() method.
             io.socket.on('feedbackcurator',function(obj){
+debugger;
                          if (obj.verb == 'created') {
                          var data = obj.data;
                          /*     if(data.type == "sendoffer"){
                           alert("send offer triggered!!");
                           } else*/ if(data.type == "acceptoffer"){
-                         alert("accept offer triggered!!");
+                                        var select = $('#'+ data.feedback_id).parents('.offers').find('.tweet').first();
+                                            select.html('Accepted');
+                         
+                         document.getElementById('show_alert').style.display = 'block';
+                         document.querySelector('.alert-link').innerHTML =
+                                "Heads up! Buyer accepted your offer <a href=" + "#"+data.feedback_id +"> check this</a>";
                          }
                          }
                          });

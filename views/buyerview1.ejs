@@ -8,8 +8,29 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+   
 <script>
     var pageData = <%- JSON.stringify(feedback)%>;
+    
+    window.onload = function subscribeAndListen(){
+        // When the document loads, send a request to users.handleoffers
+        // The controller code will subscribe you to the model 'users'
+        io.socket.get('/feedbackcurator/sendoffer/');
+        // io.socket.get('/feedbackcurator/acceptoffer/');
+        
+        // Listen for the event called 'user' emited by the publishCreate() method.
+        io.socket.on('feedbackcurator',function(obj){
+                     if (obj.verb == 'created') {
+                     var data = obj.data;
+                     if(data.type == "sendoffer"){
+                        document.getElementById('show_alert').style.display = 'block';
+                        document.querySelector('.alert-link').innerHTML =
+                            "Heads up! toysrus offered "+ data.offerInfo +" of $"+ data.refundAmount + " <a href=" + "#" +data.feedback_id +"> accept offer</a>";
+                     
+                     }
+                     }
+                     });
+    };
     </script>
 
 <style>
@@ -206,8 +227,17 @@ body .modal-dialog{
 <div class="sub_view mbm50">
     <div ng-include="'../dataView1'"></div>
 </div>
+
+<div class="alert alert-info" role="alert" id="show_alert" style="display:none;">
+    <a href="#" class="alert-link">
+    
+    </a>
+</div>
+
 <div class="sub_view">
-    <div ng-include="'../graphView1'"></div>
+    <div ng-include="'../graphView1'">
+        
+    </div>
 </div>
 </div>
 </form>
@@ -442,22 +472,7 @@ userApp.controller('userController', function ($scope, feedbackService) {
 
 
 
-                               window.onload = function subscribeAndListen(){
-    // When the document loads, send a request to users.handleoffers
-    // The controller code will subscribe you to the model 'users'
-    io.socket.get('/feedbackcurator/sendoffer/');
-   // io.socket.get('/feedbackcurator/acceptoffer/');
 
-    // Listen for the event called 'user' emited by the publishCreate() method.
-    io.socket.on('feedbackcurator',function(obj){
-      if (obj.verb == 'created') {
-         var data = obj.data;
-         if(data.type == "sendoffer"){
-             alert("send offer triggered!!");
-         } 
-      }
-    });
-};
           
 
 
