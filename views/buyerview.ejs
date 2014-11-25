@@ -555,7 +555,6 @@ userApp.controller('userController', function ($scope, feedbackService) {
             
             // Listen for the event called 'user' emited by the publishCreate() method.
             io.socket.on('feedbackcurator',function(obj){
-debugger;
                          if (obj.verb == 'created') {
                          var data = obj.data;
                          /*     if(data.type == "sendoffer"){
