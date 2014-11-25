@@ -315,9 +315,10 @@ function graph() {
     });
 }
 
-window.onload = function(){
-  setTimeout(graph, 1000);
-}
+ $(window).on("load",function(event){
+    setTimeout(graph, 1000);
+    });
+
 
 </script>
 <!-- Load the app module and its classes. -->
@@ -547,7 +548,14 @@ userApp.controller('userController', function ($scope, feedbackService) {
 </script>
 
     <script>
-        window.onload = function subscribeAndListen(){
+    $(function(){
+      subscribeAndListen();
+    })
+/**  $(window).on("load",function(event){
+    subscribeAndListen();
+    })*/
+
+       function subscribeAndListen(){
             // When the document loads, send a request to users.handleoffers
             // The controller code will subscribe you to the model 'users'
             // io.socket.get('/feedbackcurator/sendoffer/');
