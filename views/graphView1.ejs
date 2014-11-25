@@ -1,0 +1,61 @@
+<div class="dview">
+
+
+<div class="filter_group">
+    <span class="span5">{{dataItems[0].buyer_info.total_feedback_score}} Feedback left</span>
+    <!-- btn-group -->
+<div class="input-group filter">
+    <input type="text" class="form-control" placeholder="Filter title" ng-model="filterfn">
+        <div class="input-group-btn">
+            <button ng-click="getBuyerView" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Period <span class="caret"></span></button>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                <li><a href="#">Past 1 month</a></li>
+                <li><a href="#">Past 6 months</a></li>
+                <li><a href="#">Past 12 months</a></li>
+                <li class="divider"></li>
+                <li><a href="#">All</a></li>
+            </ul>
+        </div><!-- /btn-group -->
+        </div>
+</div>
+<div class="dbTableView">
+<div class="dhead">
+    <b>{{feedback}}</b>
+</div>
+<div class="ditems" ng-repeat="data in dataItems | filter: filterfn">
+        <div class="icon">
+            <div class="feedback" ng-class="{'negative': data.feedback_rating == 'negative', 'neutral': data.feedback_rating == 'neutral'}">
+                {{data.feedback_comments}}</div>
+            <div>
+<a href="http://www.ebay.com/itm/{{data.item_id}}">{{data.item_title}}</a>
+            </div>
+            <div class="seller_star">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <a href="http://www.ebay.com/usr/{{data.seller_info.seller_name}}"><span>{{data.seller_info.seller_name}}</span>
+                    ( <span>{{data.seller_info.total_feedback_score}}</span><img src="{{data.seller_info.feedback_star}}" />
+                    )</a>
+                <span class="price">${{data.item_price}}</span>
+            </div>
+        </div>
+        
+        <div style="inline-block" class="offers">
+            <div id="overlay_funds" class="">
+            <div class="btn-group">
+                <button class="btn btn-default btn-xs dropdown-toggle"  ng-class="{'no-disabled': data.offer_details.offer_sent == 'Yes', 'disabled': data.offer_details.offer_sent == 'No'}" type="button" data-toggle="dropdown" aria-expanded="false">
+                    Accept offer <span class="caret"></span>
+
+
+
+                </button>
+           
+            </div>
+            
+   
+            <div></div>
+        </div>
+        </div>
+        
+        
+    </div>
+</div>
+</div>

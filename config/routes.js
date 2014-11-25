@@ -53,6 +53,12 @@ module.exports.routes = {
   "/dataView" : {
     view: 'dataView'
   },
+   "/graphView1" : {
+    view: 'graphView1'
+  },
+  "/dataView1" : {
+    view: 'dataView1'
+  },
   "/leavefeedback":{
 	  view:"leavefeedback"
   },"/mybuyerview" : {

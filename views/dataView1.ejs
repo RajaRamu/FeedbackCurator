@@ -1,0 +1,58 @@
+<div class="infoView">
+
+<style type="text/css">
+.infoView{
+    position:relative;
+    line-height:12px;
+    margin-bottom:0px;
+}
+.infoView .tile{
+    border:1px solid #ddd;
+    border-radius:3px;
+    position:absolute;
+    left:10px;
+    bottom:-30px;
+    background:#fff;
+}
+.infoView .tile, .infoView .tile *{
+    vertical-align:middle;
+    display:inline-block;
+    text-align:center;
+    width:100px;
+    height:100px;
+    position:relative;
+}
+.infoView .tile i{
+    height:100%;
+    width:0;
+}
+.infoView .tile img{
+    max-width:95px;
+    max-height:95px;
+}
+.infoView .info i{
+    font-style:normal;
+    color:#666;
+    font-size:11px;
+}
+.infoView .info a.colr{
+    color:#333;
+    font-weight:bold;
+}
+</style>
+
+<div class="info">
+    <div>
+        <span><a class="colr" href="">{{dataItems[0].buyer_id}}</a></span>
+        (<span class="id"><a href="">{{dataItems[0].buyer_info.total_feedback_score}}</a></span><img src={{dataItems[0].buyer_info.feedback_star}} />)
+    </div>
+    <i>Member since {{dataItems[0].buyer_info.member_since}}</i></br>
+    <i>98.1% positive feedback</i>
+</div>
+<div class="tile">
+<img src="{{dataItems[0].buyer_info.logo_img_url}}" />
+    <i/>
+</div>
+
+
+</div>
