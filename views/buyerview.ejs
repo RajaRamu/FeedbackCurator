@@ -8,26 +8,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-    <script>
-        window.onload = function subscribeAndListen(){
-            // When the document loads, send a request to users.handleoffers
-            // The controller code will subscribe you to the model 'users'
-            // io.socket.get('/feedbackcurator/sendoffer/');
-            io.socket.get('/feedbackcurator/acceptoffer/');
-            
-            // Listen for the event called 'user' emited by the publishCreate() method.
-            io.socket.on('feedbackcurator',function(obj){
-                         if (obj.verb == 'created') {
-                         var data = obj.data;
-                         /*     if(data.type == "sendoffer"){
-                          alert("send offer triggered!!");
-                          } else*/ if(data.type == "acceptoffer"){
-                         alert("accept offer triggered!!");
-                         }
-                         }
-                         });
-        };
-    </script>
+
 <script>
     var pageData = <%- JSON.stringify(feedback)%>;
     </script>
@@ -356,6 +337,7 @@ userApp.controller('userController', function ($scope, feedbackService) {
                    $scope.show_discount = false;
                    $scope.show_refund = false;
                    
+              
                    $scope.sendOffer = function(id){
                     var ds = false, rf = false, data, that = $(id.target), funds = that.prev();
                    
@@ -367,13 +349,22 @@ userApp.controller('userController', function ($scope, feedbackService) {
                    }
                    data = 'fid='+$(id.target).attr('id')+'&discount='+(ds ? funds.val() : '')+'&offer_info='+(ds ? "discount" : "refund")+'&offer_sent=Yes&offer_status=pending&refund_amount='+(rf ? funds.val() : '');
                    
-                   
-                        feedbackService.updateInfo(data).then( function(  ) {
+                   var sodata = {};
+                   sodata.fid = $(id.target).attr('id');
+                   sodata.discount = (ds ? funds.val() : '');
+                   sodata.offer_info = (ds ? "discount" : "refund");
+                   sodata.offer_sent = "Yes";
+                   sodata.offer_status = "pending";
+                   sodata.refund_amount = (rf ? funds.val() : '');
+
+                        feedbackService.updateInfo(sodata).then( function(  ) {
                                                               var div = $('<div class="tweet"/>'), target =  $(id.target).parents('.offers'), select = target.find('select').first();
                                                               select.attr('disabled','true');
                                                               target.removeClass('s_d').removeClass('s_r');
                                                               div.html('Offer Sent').insertAfter(select);
                                                         });
+
+
                    }
                    
                    function getOffersInfo(){
@@ -415,6 +406,9 @@ userApp.controller('userController', function ($scope, feedbackService) {
                                                       })}, 1000);
                    
                    }
+
+
+
                    
                    });
                    
@@ -438,17 +432,11 @@ userApp.controller('userController', function ($scope, feedbackService) {
                                
                               
                                    function updateInfo( data ) {
+
+   // io.socket.get('/feedbackcurator/sendoffer/',data);
+
                                    
-                                   var request = $http({
-                                                       method: "get",
-                                                       url: "http://localhost:1337/feedbackcurator/sendoffer?" + data,
-                                                       params: {
-                                                       action: "get"
-                                                       },
-                                                       data: {
-                                                       name: data
-                                                       }
-                                                       });
+                                   var request = io.socket.get('/feedbackcurator/sendoffer/',data);
                                    
                                    return( request.then( handleSuccess, handleError ) );
                                    
@@ -535,6 +523,9 @@ userApp.controller('userController', function ($scope, feedbackService) {
                                function handleSuccess( response ) { return( response.data );  }
                                
                                });
+
+
+
                                
                                
 
@@ -543,6 +534,26 @@ userApp.controller('userController', function ($scope, feedbackService) {
 
 </script>
 
+    <script>
+        window.onload = function subscribeAndListen(){
+            // When the document loads, send a request to users.handleoffers
+            // The controller code will subscribe you to the model 'users'
+            // io.socket.get('/feedbackcurator/sendoffer/');
+            io.socket.get('/feedbackcurator/acceptoffer/');
+            
+            // Listen for the event called 'user' emited by the publishCreate() method.
+            io.socket.on('feedbackcurator',function(obj){
+                         if (obj.verb == 'created') {
+                         var data = obj.data;
+                         /*     if(data.type == "sendoffer"){
+                          alert("send offer triggered!!");
+                          } else*/ if(data.type == "acceptoffer"){
+                         alert("accept offer triggered!!");
+                         }
+                         }
+                         });
+        };
+    </script>
     
 </body>
 </html>

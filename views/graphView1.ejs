@@ -41,12 +41,15 @@
         <div style="inline-block" class="offers">
             <div id="overlay_funds" class="">
             <div class="btn-group">
-                <button  id="{{data.feedback_id}}" ng-click="acceptOffer(data.feedback_id)" class="btn btn-default btn-xs dropdown-toggle"  ng-class="{'no-disabled': data.offer_details.offer_sent == 'Yes', 'disabled': data.offer_details.offer_sent == 'No'}" type="button"  aria-expanded="false">
-                    Accept Offer
+                <button data="{{data.offer_details.offer_status}}" id="{{data.feedback_id}}" ng-click="acceptOffer(data.feedback_id)" class="btn btn-default btn-xs dropdown-toggle"  ng-class="{'no-disabled': data.offer_details.offer_sent == 'Yes', 'disabled': data.offer_details.offer_sent == 'No'}" type="button"  aria-expanded="false">
+                    Accept offer
 
-
+                    
 
                 </button>
+
+
+           
            
             </div>
             

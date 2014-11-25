@@ -264,6 +264,7 @@ userApp.controller('userController', function ($scope, feedbackService) {
                    $scope.show_discount = false;
                    $scope.show_refund = false;
                    
+                   changeText();
                    $scope.sendOffer = function(id){
                     var data, that = $('#'+id), refund = that.prev(), discount = refund.prev();
                         data = 'fid='+id+'&discount='+discount.val()+'&offer_info=dicsount&offer_sent=Yes&offer_status=pending&refund_amount';
@@ -280,16 +281,46 @@ userApp.controller('userController', function ($scope, feedbackService) {
                     {"fid":id});
                     $('#myModal').modal('show');
                        $("#"+id).addClass("disabled");
-                    
-
 
 
 
                    }
+
+                                  function changeText (){
+
+                            setTimeout (function(){
+                              debugger;
+                                var a = $('button[data="Accepted"]'), oa = $('button[data="offer Accepted"]'),
+                                noffer = $('button');
+                                if(a.length){
+
+                                    a.text('Accepted');
+
+                                }
+                                if(oa.length){
+                                    a.text('Accepted');
+
+                                }
+
+                                if(noffer.length  ){
+                                  for(var i = noffer.length-1;i>=0;i--){
+                                    var x = $(noffer[i]);
+
+
+                                  if(x.text().trim() == "Accept offer" && x.is(".disabled")){
+
+                                  x.text(" - ");
+                                  }
+                                }
+                                  }
+
+                            },500);
+
+                        }
+
+                 });
                  
-                   
-                   });
-                   
+                
                    
                    userApp.service("feedbackService",
                                function( $http, $q ) {

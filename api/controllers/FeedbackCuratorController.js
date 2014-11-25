@@ -42,7 +42,7 @@ sendoffer : function (req, res){
  } else if (req.isSocket){
 
           FeedbackCurator.watch(req);
-          console.log('Feedbackcurators with socket id '+sails.sockets.id(req)+' is now subscribed to the model class \'Feedbackcurators\'.');
+          console.log('SEND OFFER: Feedbackcurators with socket id '+sails.sockets.id(req)+' is now subscribed to the model class \'Feedbackcurators\'.');
 
   }  else {
 
@@ -114,7 +114,7 @@ if (req.param("fid") != null && req.isSocket){
  } else if (req.isSocket){
 
           FeedbackCurator.watch(req);
-          console.log('FeedbackCurator with socket id '+sails.sockets.id(req)+' is now subscribed to the model class \'Feedbackcurators\'.');
+          console.log('ACCEPT OFFER: FeedbackCurator with socket id '+sails.sockets.id(req)+' is now subscribed to the model class \'Feedbackcurators\'.');
 
   }  else {
 
